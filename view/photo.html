@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的空间--说说 </title>
+    <link href="/static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/fileinput.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top clearfix">
+    <div class="container">
+        <div class="pull-left logo"><img src="/static/img/logo_x.png" height="50"></div>
+        <ul class="nav navbar-nav">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/home">个人中心</a></li>
+            <li><a href="/say">说说</a></li>
+            <li><a href="/diary">日志</a></li>
+            <li class="active"><a href="/photo">相册</a></li>
+        </ul>
+        <div class="pull-right">
+            <ul class="nav navbar-nav">
+                <li><a>
+                {{if .user.NickName}}
+                {{.user.NickName}}
+                {{else}}
+                {{.user.UserName}}
+                {{end}}
+                    已登陆
+                </a></li>
+                <li><a href="/logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="main">
+        <div class="photo-title clearfix">
+            <strong>我的相册</strong>
+            <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#createModal">创建相册</button>
+        </div>
+        <hr class="line2">
+
+        <div class="photo-list">
+        {{range $photo :=.photos}}
+            <div class="photo-box">
+                <div class="photo-info clearfix">
+                    <input type="hidden" id="sayId" value="{{$photo.Id}}">
+                    <strong>{{$photo.PhotoName}}</strong>
+                    {{/*<span>({{$photo.CreateTime}})</span>*/}}
+                    <span class="pull-right"><button type="button" class="btn btn-default ml10">删除相册</button></span>
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#uploadModal" data-id="{{$photo.Id}}" data-name="{{$photo.PhotoName}}">上传照片</button>
+                    </span>
+                </div>
+                <hr class="line2">
+                <div class="pic-list clearfix">
+                    {{range $pic := $photo.Pictures}}
+                    <div class="pic-info pull-left">
+                        <img src="{{$pic.PicUrl}}" height="100">
+                        <p>{{$pic.PicName}}</p>
+                        <p><a href="/picture/delete">删除</a></p>
+                    </div>
+                    {{end}}
+                </div>
+            </div>
+        {{end}}
+        </div>
+    </div>
+</div>
+
+<!-- 创建相册弹窗 -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="createModal">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">创建相册</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-group">
+                    <label for="photoName">相册名称</label>
+                    <input class="form-control" name="photoName" id="photoName" placeholder="请输入相册名称">
+                </form>
+                <p class="error-msg" id="photoNameError"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="CreatePhoto()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 上传照片弹窗 -->
+<div class="modal fade bs-example-modal-lg" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <span id="photoId" style="display: none"></span>
+                <form enctype="multipart/form-data">
+                    <input class="pic-upload" name="pic-upload" type="file" multiple>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script type="text/javascript" src="/static/js/jquery.min-2.1.1.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/main.js"></script>
+<script type="text/javascript" src="/static/js/fileinput.js"></script>
+<script type="text/javascript" src="/static/js/upload.js"></script>
+
+</html>

@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+
+.mr10{
+    margin-right: 10px;
+}
+
+.mr20{
+    margin-right: 20px;
+}
+
+.mr30{
+    margin-right: 30px;
+}
+
+.ml10{
+    margin-left: 10px;
+}
+
+.ml20{
+    margin-left: 20px;
+}
+
+.ml30{
+    margin-left: 30px;
+}
+
+.mt10{
+    margin-top: 10px;
+}
+
+.mt20{
+    margin-top: 20px;
+}
+
+.mt30{
+    margin-top: 30px;
+}
+
+.line1{
+    border: 1px solid #c0c0c0;
+}
+
+.line2{
+    border: 2px solid #e0e0e0;
+    margin: 5px 0 10px 0;
+}
+
+.error-msg{
+    color: red;
+}
+
+.logo{
+    margin-right:30px;
+}
+
+/*登陆*/
+.login-left{
+    height: 400px;
+    margin-top: 100px;
+    border: 1px solid #c0c0c0;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.login-box{
+    height: 400px;
+    margin-top: 100px;
+    border: 1px solid #c0c0c0;
+    padding-top: 20px;
+}
+
+.login-title{
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-third{
+    margin-top: 30px;
+}
+
+
+.register-left{
+    height: 500px;
+    margin-top: 50px;
+    border: 1px solid #c0c0c0;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.register-box{
+    height: 500px;
+    margin-top: 50px;
+    border: 1px solid #c0c0c0;
+    padding-top: 20px;
+}
+
+.main{
+    margin-top: 80px;
+    padding: 20px;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+}
+
+.photo-box{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px dashed #c0c0c0;
+    border-radius: 5px;
+}
+
+.pic-info{
+    width: 25%;
+    text-align: center;
+    margin-bottom: 20px;
+}

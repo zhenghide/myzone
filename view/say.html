@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的空间--说说</title>
+    <link href="/static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top clearfix">
+    <div class="container">
+        <div class="pull-left logo"><img src="/static/img/logo_x.png" height="50"></div>
+        <ul class="nav navbar-nav">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/home">个人中心</a></li>
+            <li class="active"><a href="/say">说说</a></li>
+            <li><a href="/diary">日志</a></li>
+            <li><a href="/photo">相册</a></li>
+        </ul>
+        <div class="pull-right">
+            <ul class="nav navbar-nav">
+                <li><a>
+                {{if .user.NickName}}
+                {{.user.NickName}}
+                {{else}}
+                {{.user.UserName}}
+                {{end}}
+                    已登陆
+                </a></li>
+                <li><a href="/logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="main">
+        <strong>我的说说</strong>
+        <hr class="line2">
+        <div class="create-say">
+            <textarea class="form-control" id="sayContent"></textarea>
+            <button type="button" class="btn btn-default pull-right" onclick="createSay()">发表</button>
+        </div>
+        <div class="clearfix"></div>
+        <div class="say-list mt20">
+        {{range $say :=.says}}
+            <div class="say-box clearfix">
+                <div class="user-photo pull-left"><img src="/static/img/photo.png" width="50"></div>
+                <div class="say pull-left ml10">
+                    <input type="hidden" id="sayId" value="{{$say.Id}}">
+                    <p>{{$say.Content}}</p>
+                    <span class="pull-right">{{$say.CreateTime}}</span><br>
+                </div>
+                <div class="say-operate pull-right">
+                    <button type="button" class="btn btn-default btn-sm pull-right" onclick="deleteSay({{$say.Id}})">删除</button>
+                </div>
+            </div>
+            <hr class="line1">
+        {{end}}
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script type="text/javascript" src="/static/js/jquery.min-2.1.1.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/main.js"></script>
+
+</html>

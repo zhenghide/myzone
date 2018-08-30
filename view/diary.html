@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的空间--说说</title>
+    <link href="/static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="/static/sum/summernote.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top clearfix">
+    <div class="container">
+        <div class="pull-left logo"><img src="/static/img/logo_x.png" height="50"></div>
+        <ul class="nav navbar-nav">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/home">个人中心</a></li>
+            <li><a href="/say">说说</a></li>
+            <li class="active"><a href="/diary">日志</a></li>
+            <li><a href="/photo">相册</a></li>
+        </ul>
+        <div class="pull-right">
+            <ul class="nav navbar-nav">
+                <li><a>
+                {{if .user.NickName}}
+                {{.user.NickName}}
+                {{else}}
+                {{.user.UserName}}
+                {{end}}
+                    已登陆
+                </a></li>
+                <li><a href="/logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="main">
+        <strong>我的日志</strong>
+        <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-toggle="modal" data-target=".bs-example-modal-lg">写日志</button>
+        <div class="clearfix"></div>
+        <hr class="line2">
+
+        <!-- Modal -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myLargeModalLabel">写日志</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="create-say">
+                            <div class="col-md-8 col-md-offset-2">
+                                <input class="form-control text-center" type="text" placeholder="请填写日志标题" id="diaryTitle">
+                            </div>
+                            <br><br>
+                            <div id="diaryContent"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="createDiary()">发表</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="say-list mt30">
+        {{range $diary :=.diaries}}
+            <div class="say-box clearfix">
+                <div class="user-photo col-md-1"><img src="/static/img/photo.png" width="50"></div>
+                <div class="diary-info col-md-11">
+                    <div class="clearfix">
+                        <input type="hidden" id="sayId" value="{{$diary.Id}}">
+                        <p><strong>{{$diary.Title}}</strong></p>
+                        <div>
+                            {{$diary.Content}}
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <span class="pull-left">{{$diary.CreateTime}}</span><br>
+                        <button type="button" class="btn btn-default btn-sm pull-right" onclick="deleteDiary({{$diary.Id}})">删除</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+            <div><hr class="line1"></div>
+        {{end}}
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script type="text/javascript" src="/static/js/jquery.min-2.1.1.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/sum/summernote.js"></script>
+<script type="text/javascript" src="/static/js/main.js"></script>
+<script>
+    $('#diaryContent').summernote({
+        height: 280,
+        placeholder:'write here...',
+    });
+</script>
+</html>
