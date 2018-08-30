@@ -52,7 +52,6 @@ func main() {
 	}()
 }
 
-
 func init()  {
 	//使用session需要注册结构体
 	gob.Register(&model.User{})
